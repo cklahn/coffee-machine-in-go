@@ -17,6 +17,37 @@ func outOfRessources(missing string) {
 	fmt.Printf("Sorry, not enough %s!\n", missing)
 	fmt.Println()
 }
+
+func updateState(water, milk, beans, cacoa, cups, money *int, step string, selection int) {
+	if step == "buy" {
+		switch selection {
+		case 1:
+			*water -= 250
+			*beans -= 16
+			*cups -= 1
+			*money += 4
+		case 2:
+			*water -= 350
+			*milk -= 75
+			*beans -= 20
+			*cups -= 1
+			*money += 7
+		case 3:
+			*water -= 200
+			*milk -= 100
+			*beans -= 12
+			*cups -= 1
+			*money += 6
+		case 4:
+			*milk -= 200
+			*cacoa -= 25
+			*cups -= 1
+			*money += 8
+		}
+
+	}
+}
+
 func buy(water, milk, beans, cacoa, cups, money *int) {
 	var coffee int
 	fmt.Println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - cacoa:")
@@ -26,10 +57,7 @@ func buy(water, milk, beans, cacoa, cups, money *int) {
 	switch coffee {
 	case 1:
 		if *water >= 250 && *beans >= 16 && *cups >= 1 {
-			*water -= 250
-			*beans -= 16
-			*cups -= 1
-			*money += 4
+			updateState(water, milk, beans, cacoa, cups, money, "buy", coffee)
 			fmt.Println("I have enough resources, making you a coffee!")
 			fmt.Println()
 		} else if *water < 250 {
@@ -41,11 +69,7 @@ func buy(water, milk, beans, cacoa, cups, money *int) {
 		}
 	case 2:
 		if *water >= 350 && *milk >= 75 && *beans >= 20 && *cups >= 1 {
-			*water -= 350
-			*milk -= 75
-			*beans -= 20
-			*cups -= 1
-			*money += 7
+			updateState(water, milk, beans, cacoa, cups, money, "buy", coffee)
 			fmt.Println("I have enough resources, making you a coffee!")
 			fmt.Println()
 		} else if *water < 350 {
@@ -59,11 +83,7 @@ func buy(water, milk, beans, cacoa, cups, money *int) {
 		}
 	case 3:
 		if *water >= 200 && *milk >= 100 && *beans >= 12 && *cups >= 1 {
-			*water -= 200
-			*milk -= 100
-			*beans -= 12
-			*cups -= 1
-			*money += 6
+			updateState(water, milk, beans, cacoa, cups, money, "buy", coffee)
 			fmt.Println("I have enough resources, making you a coffee!")
 			fmt.Println()
 		} else if *water < 200 {
@@ -77,10 +97,7 @@ func buy(water, milk, beans, cacoa, cups, money *int) {
 		}
 	case 4:
 		if *milk >= 200 && *cacoa >= 25 && *cups >= 1 {
-			*milk -= 200
-			*cacoa -= 25
-			*cups -= 1
-			*money += 8
+			updateState(water, milk, beans, cacoa, cups, money, "buy", coffee)
 			fmt.Println("I have enough resources, making you a cacoa!")
 			fmt.Println()
 		} else if *milk < 100 {
